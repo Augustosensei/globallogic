@@ -3,6 +3,7 @@ package com.globallogic.microservice1.service.impl;
 
 import com.globallogic.microservice1.dto.TelefonoDTO;
 import com.globallogic.microservice1.dto.UsuarioDTO;
+import com.globallogic.microservice1.dto.UsuarioResponseDTO;
 import com.globallogic.microservice1.exception.ClienteException;
 import com.globallogic.microservice1.model.Telefono;
 import com.globallogic.microservice1.model.Usuario;
@@ -61,10 +62,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
         return usuarioRepo.save(u);
     }
 
-    @Override
-    public List<Usuario> listarTodos() {
-        return usuarioRepo.findAll();
-    }
+@Override
+public List<UsuarioResponseDTO> listarTodos() {
+    return usuarioRepo.findAll().stream()
+        .map(this::mapToResponseDTO)
+        .collect(Collectors.toList());
+}
+
+
 
     @Override
     public Usuario buscarPorId(Long id) {
@@ -80,10 +85,60 @@ public class UsuarioServiceImpl implements IUsuarioService {
         return telefono;
     }
 
-    @Override
-public Usuario buscarPorEmail(String email) {
+
+@Override
+public UsuarioResponseDTO buscarPerfilPorEmail(String email) {
+    Usuario usuario = usuarioRepo.findByEmail(email)
+        .orElseThrow(() -> new ClienteException("Usuario no encontrado", HttpStatus.NOT_FOUND));
+    return mapToResponseDTO(usuario);
+}
+
+
+
+public Usuario getEntidadPorEmail(String email) {
     return usuarioRepo.findByEmail(email)
         .orElseThrow(() -> new ClienteException("Usuario no encontrado", HttpStatus.NOT_FOUND));
 }
+
+
+
+private UsuarioDTO mapToDTO(Usuario usuario) {
+    UsuarioDTO dto = new UsuarioDTO();
+    dto.setName(usuario.getName());
+    dto.setEmail(usuario.getEmail());
+
+    var telefonos = usuario.getTelefonos().stream().map(tel -> {
+        TelefonoDTO t = new TelefonoDTO();
+        t.setNumber(tel.getNumber());
+        t.setCitycode(tel.getCitycode());
+        t.setContrycode(tel.getContrycode());
+        return t;
+    }).collect(Collectors.toList());
+
+    dto.setTelefonos(telefonos);
+    return dto;
+}
+
+private UsuarioResponseDTO mapToResponseDTO(Usuario usuario) {
+    return UsuarioResponseDTO.builder()
+        .id(usuario.getId())
+        .name(usuario.getName())
+        .email(usuario.getEmail())
+        .created(usuario.getCreated())
+        .lastLogin(usuario.getLastLogin())
+        .isActive(usuario.getIsActive())
+        .telefonos(
+            usuario.getTelefonos().stream().map(t -> {
+                TelefonoDTO dto = new TelefonoDTO();
+                dto.setNumber(t.getNumber());
+                dto.setCitycode(t.getCitycode());
+                dto.setContrycode(t.getContrycode());
+                return dto;
+            }).collect(Collectors.toList())
+        )
+        .build();
+}
+
+
 
 }

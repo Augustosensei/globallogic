@@ -3,6 +3,7 @@ package com.globallogic.microservice1.controller;
 
 
 import com.globallogic.microservice1.dto.UsuarioDTO;
+import com.globallogic.microservice1.dto.UsuarioResponseDTO;
 import com.globallogic.microservice1.model.Usuario;
 import com.globallogic.microservice1.security.JwtUtils;
 import com.globallogic.microservice1.service.IUsuarioService;
@@ -68,15 +69,19 @@ public class UsuarioController {
     }
 
   
-    @GetMapping("/usuarios")
-    public ResponseEntity<List<Usuario>> listarUsuarios() {
-        return ResponseEntity.ok(usuarioService.listarTodos());
-    }
+@GetMapping("/usuarios")
+public ResponseEntity<List<UsuarioResponseDTO>> listarUsuarios() {
+    return ResponseEntity.ok(usuarioService.listarTodos());
+}
 
 
-    @GetMapping("/perfil")
-    public ResponseEntity<Usuario> perfil(Principal principal) {
-        Usuario usuario = usuarioService.buscarPorEmail(principal.getName());
-        return ResponseEntity.ok(usuario);
-    }
+
+@GetMapping("/perfil")
+public ResponseEntity<UsuarioResponseDTO> perfil(Principal principal) {
+    UsuarioResponseDTO dto = usuarioService.buscarPerfilPorEmail(principal.getName());
+    return ResponseEntity.ok(dto);
+}
+
+
+
 }
