@@ -13,4 +13,6 @@ public interface IUsuarioService {
     List<UsuarioResponseDTO> listarTodos();
     Usuario buscarPorId(Long id);
     UsuarioResponseDTO buscarPerfilPorEmail(String email);
+    UsuarioDTO buscarPorEmail(String email); 
+    UsuarioResponseDTO mapToResponseDTO(Usuario usuario);
 }

@@ -1,10 +1,16 @@
-package com.globallogic.microservice1.security;
+package com.globallogic.login.login.security;
+
+
+
+
+
 
 
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -52,8 +58,15 @@ public class JwtUtils {
      * Genera un nuevo token para el usuario proporcionado.
      */
     public String generateToken(UserDetails userDetails) {
+        return generateToken(userDetails.getUsername());
+    }
+
+    /**
+     * Sobrecarga para generar token solo con el username (ej: email).
+     */
+    public String generateToken(String username) {
         return Jwts.builder()
-            .setSubject(userDetails.getUsername())
+            .setSubject(username)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
             .signWith(SignatureAlgorithm.HS256, jwtSecret)
@@ -63,9 +76,9 @@ public class JwtUtils {
     /**
      * Valida que el token corresponda al usuario y no esté expirado.
      */
-    public boolean validateToken(String token, UserDetails userDetails) {
+    public boolean validateToken(String token, String expectedUsername) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return username.equals(expectedUsername) && !isTokenExpired(token);
     }
 
     /**

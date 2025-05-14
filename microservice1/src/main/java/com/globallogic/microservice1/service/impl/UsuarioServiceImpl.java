@@ -119,7 +119,7 @@ private UsuarioDTO mapToDTO(Usuario usuario) {
     return dto;
 }
 
-private UsuarioResponseDTO mapToResponseDTO(Usuario usuario) {
+public UsuarioResponseDTO mapToResponseDTO(Usuario usuario) {
     return UsuarioResponseDTO.builder()
         .id(usuario.getId())
         .name(usuario.getName())
@@ -138,6 +138,14 @@ private UsuarioResponseDTO mapToResponseDTO(Usuario usuario) {
         )
         .build();
 }
+
+@Override
+public UsuarioDTO buscarPorEmail(String email) {
+    Usuario usuario = usuarioRepo.findByEmail(email)
+        .orElseThrow(() -> new ClienteException("Usuario no encontrado", HttpStatus.NOT_FOUND));
+    return mapToDTO(usuario);
+}
+
 
 
 
