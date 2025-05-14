@@ -53,7 +53,7 @@ public class Usuario {
         orphanRemoval = true,
         fetch = FetchType.LAZY
     )
-    private List<Telefono> phones = new ArrayList<>();
+    private List<Telefono> telefonos = new ArrayList<>();
 
     public Usuario() {
         this.created   = LocalDateTime.now();
