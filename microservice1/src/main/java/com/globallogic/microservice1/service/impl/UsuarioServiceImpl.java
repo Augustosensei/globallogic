@@ -79,4 +79,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
         telefono.setContrycode(dto.getContrycode());
         return telefono;
     }
+
+    @Override
+public Usuario buscarPorEmail(String email) {
+    return usuarioRepo.findByEmail(email)
+        .orElseThrow(() -> new ClienteException("Usuario no encontrado", HttpStatus.NOT_FOUND));
+}
+
 }

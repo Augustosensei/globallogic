@@ -11,4 +11,5 @@ public interface IUsuarioService {
     Usuario iniciarSesion(String email);
     List<Usuario> listarTodos();
     Usuario buscarPorId(Long id);
+    Usuario buscarPorEmail(String email);
 }
