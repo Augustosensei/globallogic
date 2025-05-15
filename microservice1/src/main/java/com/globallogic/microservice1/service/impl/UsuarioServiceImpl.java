@@ -102,11 +102,11 @@ public Usuario getEntidadPorEmail(String email) {
 
 
 
-private UsuarioDTO mapToDTO(Usuario usuario) {
+public UsuarioDTO mapToDTO(Usuario usuario) {
     UsuarioDTO dto = new UsuarioDTO();
     dto.setName(usuario.getName());
     dto.setEmail(usuario.getEmail());
-
+    dto.setPassword(usuario.getPassword());
     var telefonos = usuario.getTelefonos().stream().map(tel -> {
         TelefonoDTO t = new TelefonoDTO();
         t.setNumber(tel.getNumber());

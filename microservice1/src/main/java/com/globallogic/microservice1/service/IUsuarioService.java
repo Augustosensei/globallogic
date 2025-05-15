@@ -15,4 +15,8 @@ public interface IUsuarioService {
     UsuarioResponseDTO buscarPerfilPorEmail(String email);
     UsuarioDTO buscarPorEmail(String email); 
     UsuarioResponseDTO mapToResponseDTO(Usuario usuario);
+
+    Usuario getEntidadPorEmail(String email);
+
+    UsuarioDTO mapToDTO(Usuario usuario);
 }

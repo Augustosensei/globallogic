@@ -35,10 +35,14 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
-  
+
+
+
     @GetMapping("/email/{email}")
     public ResponseEntity<UsuarioDTO> getByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(usuarioService.buscarPorEmail(email));
+        Usuario usuario = usuarioService.getEntidadPorEmail(email);
+        UsuarioDTO dto = usuarioService.mapToDTO(usuario);
+        return ResponseEntity.ok(dto);
     }
 
 
