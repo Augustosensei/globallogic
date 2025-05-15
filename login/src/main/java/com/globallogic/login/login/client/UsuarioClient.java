@@ -9,6 +9,6 @@ import com.globallogic.login.login.dto.UsuarioDTO;
 @FeignClient(name = "usuario-service", url = "http://localhost:8081")
 public interface UsuarioClient {
 
-	@GetMapping("/api/usuarios/email/{email}")
+	@GetMapping("/email/{email}")
 	UsuarioDTO getByEmail(@PathVariable("email") String email);
 }
