@@ -11,11 +11,6 @@ import org.springframework.web.client.RestTemplate;
 public class SpringConfig {
     
 
-    @Bean
-public RestTemplate restTemplate() {
-	return new RestTemplate();
-}
-
 
 @Bean
 public PasswordEncoder passwordEncoder() {
