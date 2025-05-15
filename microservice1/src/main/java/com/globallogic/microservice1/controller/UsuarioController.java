@@ -46,4 +46,11 @@ public class UsuarioController {
     }
 
 
+    @GetMapping("/perfil/{email}")
+    public ResponseEntity<UsuarioResponseDTO> perfil(@PathVariable String email) {
+        Usuario usuario = usuarioService.getEntidadPorEmail(email);
+        UsuarioResponseDTO dto = usuarioService.mapToResponseDTO(usuario);
+        return ResponseEntity.ok(dto);
+    }
+
 }
