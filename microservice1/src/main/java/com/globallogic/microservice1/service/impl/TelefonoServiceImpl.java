@@ -40,7 +40,7 @@ public class TelefonoServiceImpl implements ITelefonoService {
 
     @Override
     public List<Telefono> listarPorUsuario(Long usuarioId) {
-        // Optional: validar existencia de usuario
+
         if (!usuarioRepo.existsById(usuarioId)) {
             throw new ClienteException("Usuario no encontrado", HttpStatus.NOT_FOUND);
         }

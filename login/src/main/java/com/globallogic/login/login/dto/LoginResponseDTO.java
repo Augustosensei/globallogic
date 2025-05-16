@@ -6,7 +6,8 @@ import lombok.*;
 
 @Getter
 @Builder
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginResponseDTO {
 	private String token;
 	private String email;

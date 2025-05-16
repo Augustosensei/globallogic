@@ -35,12 +35,11 @@ public class AuthServiceImpl implements IAuthService {
 	@Override
 	public LoginResponseDTO login(final LoginRequestDTO request) {
 
-		/* 1️⃣  JWT provisional para que el interceptor Feign lo envíe. */
+
 		String provisionalJwt = jwtUtils.generateToken(request.getEmail());
 		SecurityContextHolder.getContext().setAuthentication(
 				new UsernamePasswordAuthenticationToken(request.getEmail(), provisionalJwt, new ArrayList<>()));
 
-		/* 2️⃣  Llamo al microservicio de usuarios para obtener los datos. */
 		UsuarioDTO usuario;
 		try {
 			usuario = usuarioClient.getByEmail(request.getEmail());
@@ -48,18 +47,17 @@ public class AuthServiceImpl implements IAuthService {
 			throw new ClienteException("No se pudo obtener el usuario", HttpStatus.BAD_GATEWAY);
 		}
 
-		/* 3️⃣  Valido la contraseña usando BCrypt. */
 		if (!passwordEncoder.matches(request.getPassword(), usuario.getPassword())) {
 			throw new ClienteException("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
 		}
 
-		/* 4️⃣  Genero JWT definitivo y actualizo el contexto. */
+
 		String finalJwt = jwtUtils.generateToken(usuario.getEmail());
 		SecurityContextHolder.clearContext();
 		SecurityContextHolder.getContext().setAuthentication(
 				new UsernamePasswordAuthenticationToken(usuario.getEmail(), finalJwt, new ArrayList<>()));
 
-		/* 5️⃣  Construyo la respuesta completa. */
+
 		return LoginResponseDTO.builder()
 				.token(finalJwt)
 				.email(usuario.getEmail())
