@@ -20,8 +20,8 @@ public class UsuarioDTO {
 
     @NotBlank(message = "La contraseña es obligatoria")
     @Pattern(
-            regexp = "^(?=(.*\\d){2})(?=(.*[A-Z]){1})[A-Za-z\\d]{8,12}$",
-            message = "La contraseña debe tener 1 mayúscula, exactamente 2 números y entre 8 y 12 caracteres"
+            regexp = "^(?=(?:.*[A-Z]){1})(?!.*[A-Z].*[A-Z])(?=(?:.*\\d){2})(?!.*\\d.*\\d.*\\d)[A-Za-z\\d]{8,12}$",
+            message = "La contraseña debe contener 1 mayúscula, exactamente 2 números y entre 8 y 12 caracteres"
     )
     private String password;
 

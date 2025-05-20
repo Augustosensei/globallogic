@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/globallogic.iml" filepath="$PROJECT_DIR$/.idea/globallogic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/login.main.iml" filepath="$PROJECT_DIR$/.idea/modules/login.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/microservice1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/microservice1.main.iml" />
     </modules>
   </component>
 </project>
