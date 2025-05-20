@@ -1,16 +1,14 @@
 package com.globallogic.microservice1.controller;
 
 
-
 import com.globallogic.microservice1.dto.UsuarioDTO;
 import com.globallogic.microservice1.dto.UsuarioResponseDTO;
 import com.globallogic.microservice1.model.Usuario;
-
 import com.globallogic.microservice1.service.IUsuarioService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -20,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-     private final IUsuarioService usuarioService;
+    private final IUsuarioService usuarioService;
 
     @PostMapping("/sign-up")
     public ResponseEntity<UsuarioResponseDTO> signUp(@Valid @RequestBody UsuarioDTO dto) {
@@ -34,8 +32,6 @@ public class UsuarioController {
     public ResponseEntity<List<UsuarioResponseDTO>> listarUsuarios() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
-
-
 
 
     @GetMapping("/email/{email}")

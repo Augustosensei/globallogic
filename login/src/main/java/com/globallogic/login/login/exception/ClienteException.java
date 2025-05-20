@@ -1,10 +1,8 @@
 package com.globallogic.login.login.exception;
 
 
-
-import org.springframework.http.HttpStatus;
-
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 public class ClienteException extends RuntimeException {

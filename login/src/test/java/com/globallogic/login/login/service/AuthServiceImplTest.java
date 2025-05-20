@@ -1,30 +1,29 @@
 package com.globallogic.login.login.service;
 
 
-
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
-
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-
-
-import com.globallogic.login.login.service.impl.AuthServiceImpl;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.globallogic.login.login.client.UsuarioClient;
 import com.globallogic.login.login.dto.LoginRequestDTO;
 import com.globallogic.login.login.dto.LoginResponseDTO;
 import com.globallogic.login.login.dto.UsuarioDTO;
 import com.globallogic.login.login.exception.ClienteException;
 import com.globallogic.login.login.security.JwtUtils;
+import com.globallogic.login.login.service.impl.AuthServiceImpl;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.BDDMockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -36,9 +35,12 @@ class AuthServiceImplTest {
     private static final String PROVISIONAL_JWT = "provisional.jwt";
     private static final String FINAL_JWT = "final.jwt";
 
-    @Mock  private UsuarioClient usuarioClient;
-    @Mock  private JwtUtils jwtUtils;
-    @Mock  private PasswordEncoder passwordEncoder;
+    @Mock
+    private UsuarioClient usuarioClient;
+    @Mock
+    private JwtUtils jwtUtils;
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private AuthServiceImpl authService;
@@ -86,7 +88,6 @@ class AuthServiceImplTest {
         then(passwordEncoder).should().matches(RAW_PASSWORD, HASHED_PASSWORD);
         then(jwtUtils).should(times(2)).generateToken(EMAIL);
     }
-
 
 
     @Test

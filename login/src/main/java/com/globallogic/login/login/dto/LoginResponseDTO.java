@@ -1,17 +1,20 @@
 package com.globallogic.login.login.dto;
 
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginResponseDTO {
-	private String token;
-	private String email;
-	private LocalDateTime lastLogin;
+    private String token;
+    private String email;
+    private LocalDateTime lastLogin;
 
 
 }

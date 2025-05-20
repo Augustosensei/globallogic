@@ -1,14 +1,13 @@
 package com.globallogic.microservice1.dto;
 
-import javax.validation.constraints.NotNull;
-
-
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 
 @Data
 public class TelefonoDTO {
-    
+
     @NotNull(message = "El número es obligatorio")
     private Long number;
 

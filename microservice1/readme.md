@@ -1,17 +1,18 @@
 # Microservicio de Usuarios
 
-Este proyecto es un microservicio RESTful desarrollado con **Spring Boot**, que gestiona el registro y autenticación de usuarios, incluyendo validaciones de contraseña, relaciones con teléfonos y seguridad mediante **JWT**.
+Este proyecto es un microservicio RESTful desarrollado con **Spring Boot**, que gestiona el registro y autenticación de
+usuarios, incluyendo validaciones de contraseña, relaciones con teléfonos y seguridad mediante **JWT**.
 
 ## 📦 Tecnologías utilizadas
 
-| Tecnología        | Versión       |
-|------------------|---------------|
-| Java             | 11            |
-| Spring Boot      | 2.5.14        |
-| Gradle           | 7.4           |
-| Base de datos    | H2 en memoria |
-| JWT              | jjwt 0.9.1    |
-| Lombok           | Sí            |
+| Tecnología    | Versión       |
+|---------------|---------------|
+| Java          | 11            |
+| Spring Boot   | 2.5.14        |
+| Gradle        | 7.4           |
+| Base de datos | H2 en memoria |
+| JWT           | jjwt 0.9.1    |
+| Lombok        | Sí            |
 
 ---
 

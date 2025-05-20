@@ -1,18 +1,12 @@
 package com.globallogic.microservice1.controller;
 
 
-
-
-
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.globallogic.microservice1.dto.UsuarioDTO;
+import com.globallogic.microservice1.dto.UsuarioResponseDTO;
+import com.globallogic.microservice1.model.Usuario;
+import com.globallogic.microservice1.security.JwtUtils;
+import com.globallogic.microservice1.service.IUsuarioService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +16,29 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.globallogic.microservice1.dto.UsuarioDTO;
-import com.globallogic.microservice1.dto.UsuarioResponseDTO;
-import com.globallogic.microservice1.model.Usuario;
-import com.globallogic.microservice1.security.JwtUtils;
-import com.globallogic.microservice1.service.IUsuarioService;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UsuarioController.class)
 @AutoConfigureMockMvc(addFilters = false)   // desactiva filtros de seguridad
 class UsuarioControllerTest {
 
-    @Autowired MockMvc mockMvc;
-    @Autowired ObjectMapper objectMapper;
+    @Autowired
+    MockMvc mockMvc;
+    @Autowired
+    ObjectMapper objectMapper;
 
-    @MockBean IUsuarioService usuarioService;
-    @MockBean JwtUtils jwtUtils;             // mock para satisfacer SecurityConfig
+    @MockBean
+    IUsuarioService usuarioService;
+    @MockBean
+    JwtUtils jwtUtils;             // mock para satisfacer SecurityConfig
 
     /* ---------- POST /sign-up OK ---------- */
     @Test

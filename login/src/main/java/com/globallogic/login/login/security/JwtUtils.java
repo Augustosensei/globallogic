@@ -1,16 +1,9 @@
 package com.globallogic.login.login.security;
 
 
-
-
-
-
-
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -24,11 +17,15 @@ import java.util.function.Function;
 @Component
 public class JwtUtils {
 
-    /** Clave secreta para firmar el token (configurable en application.properties). */
+    /**
+     * Clave secreta para firmar el token (configurable en application.properties).
+     */
     @Value("${app.jwtSecret}")
     private String jwtSecret;
 
-    /** Duración del token en milisegundos (configurable en application.properties). */
+    /**
+     * Duración del token en milisegundos (configurable en application.properties).
+     */
     @Value("${app.jwtExpirationMs}")
     private long jwtExpirationMs;
 
@@ -66,11 +63,11 @@ public class JwtUtils {
      */
     public String generateToken(String username) {
         return Jwts.builder()
-            .setSubject(username)
-            .setIssuedAt(new Date())
-            .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-            .signWith(SignatureAlgorithm.HS256, jwtSecret)
-            .compact();
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .compact();
     }
 
     /**
@@ -93,8 +90,8 @@ public class JwtUtils {
      */
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-            .setSigningKey(jwtSecret)
-            .parseClaimsJws(token)
-            .getBody();
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
