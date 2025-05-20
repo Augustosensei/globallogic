@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -51,10 +52,11 @@ class UsuarioControllerTest {
         in.setPassword("a2asfGfdfdf4");
 
         // Mocks service
+        UUID expectedId = UUID.fromString("00000000-0000-0000-0000-000000000001");
         Usuario entidad = new Usuario();
-        entidad.setId(1L);
+        entidad.setId(expectedId);
         UsuarioResponseDTO out = UsuarioResponseDTO.builder()
-                .id(1L)
+                .id(expectedId)
                 .name("Denise")
                 .email("denise@example.com")
                 .created(LocalDateTime.now())
@@ -88,8 +90,10 @@ class UsuarioControllerTest {
     @Test
     @DisplayName("listarUsuarios: devuelve lista")
     void listarUsuarios_ok() throws Exception {
+
+        UUID expectedId = UUID.fromString("00000000-0000-0000-0000-000000000001");
         UsuarioResponseDTO dto = UsuarioResponseDTO.builder()
-                .id(1L)
+                .id(expectedId)
                 .email("denise@example.com")
                 .name("Denise")
                 .build();

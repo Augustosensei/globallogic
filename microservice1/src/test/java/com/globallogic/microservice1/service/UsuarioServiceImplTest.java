@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -158,8 +159,10 @@ class UsuarioServiceImplTest {
             tel.setCitycode(54);
             tel.setContrycode("+54");
 
+            UUID expectedId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+
             Usuario u = new Usuario();
-            u.setId(1L);
+            u.setId(expectedId);
             u.setName("Denise");
             u.setEmail("denise@example.com");
             u.setCreated(LocalDateTime.now().minusDays(1));

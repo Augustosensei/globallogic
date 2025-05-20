@@ -5,9 +5,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -17,8 +19,13 @@ public class Usuario {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @Column(length = 100)
     private String name;

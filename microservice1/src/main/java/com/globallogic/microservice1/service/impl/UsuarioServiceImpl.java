@@ -30,12 +30,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public Usuario crearUsuario(UsuarioDTO dto) {
-        // 1) Validar duplicado
+
         if (usuarioRepo.existsByEmail(dto.getEmail())) {
             throw new ClienteException("El usuario ya existe", HttpStatus.CONFLICT);
         }
 
-        // 2) Construir entidad
         Usuario u = new Usuario();
         u.setName(dto.getName());
         u.setEmail(dto.getEmail());
@@ -44,7 +43,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
         u.setLastLogin(LocalDateTime.now());
         u.setIsActive(true);
 
-        // 3) Mapear teléfonos DTO → Embeddable Telefono y asignar al Set
         Set<Telefono> telefonos = Optional.ofNullable(dto.getTelefonos())
                 .orElse(Collections.emptyList())
                 .stream()
@@ -52,7 +50,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
                 .collect(Collectors.toSet());
         u.setTelefonos(telefonos);
 
-        // 4) Guardar y devolver
         return usuarioRepo.save(u);
     }
 

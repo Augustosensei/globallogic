@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-05-20T21:21:29" hostname="MacBook-Air-de-Augusto.local" time="0.007">
+<testsuite name="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-05-20T21:50:03" hostname="MacBook-Air-de-Augusto.local" time="0.01">
   <properties/>
   <testcase name="porId_noExiste()" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" time="0.001"/>
-  <testcase name="perfilPorEmail_ok()" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" time="0.005"/>
+  <testcase name="perfilPorEmail_ok()" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" time="0.007"/>
   <testcase name="porId_ok()" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
