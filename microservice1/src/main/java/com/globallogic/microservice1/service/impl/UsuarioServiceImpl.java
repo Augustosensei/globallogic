@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,10 +30,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public Usuario crearUsuario(UsuarioDTO dto) {
+        // 1) Validar duplicado
         if (usuarioRepo.existsByEmail(dto.getEmail())) {
             throw new ClienteException("El usuario ya existe", HttpStatus.CONFLICT);
         }
 
+        // 2) Construir entidad
         Usuario u = new Usuario();
         u.setName(dto.getName());
         u.setEmail(dto.getEmail());
@@ -41,17 +44,18 @@ public class UsuarioServiceImpl implements IUsuarioService {
         u.setLastLogin(LocalDateTime.now());
         u.setIsActive(true);
 
-        List<Telefono> telefonos = Optional.ofNullable(dto.getTelefonos())
+        // 3) Mapear teléfonos DTO → Embeddable Telefono y asignar al Set
+        Set<Telefono> telefonos = Optional.ofNullable(dto.getTelefonos())
                 .orElse(Collections.emptyList())
                 .stream()
-                .map(this::mapTelefonoDTOtoEntity)
-                .peek(t -> t.setUsuario(u))
-                .collect(Collectors.toList());
+                .map(this::mapTelefonoDTOtoEntity)   // ya no necesito hacer t.setUsuario(u)
+                .collect(Collectors.toSet());
         u.setTelefonos(telefonos);
 
-
+        // 4) Guardar y devolver
         return usuarioRepo.save(u);
     }
+
 
     @Override
     public Usuario iniciarSesion(String email) {

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    
+
     @ExceptionHandler(ClienteException.class)
     public ResponseEntity<ErrorDetailDTO> handleClienteException(ClienteException ex) {
         var error = buildError(ex.getStatus().value(), ex.getMessage());

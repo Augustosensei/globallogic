@@ -2,11 +2,11 @@ package com.globallogic.microservice1.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import org.hibernate.annotations.BatchSize;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -38,13 +38,15 @@ public class Usuario {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
-    @OneToMany(
-            mappedBy = "usuario",         // aquí debe ir "usuario"
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(
+            name = "user_phones",
+            joinColumns = @JoinColumn(name = "usuario_id")
     )
-    private List<Telefono> telefonos = new ArrayList<>();
+    @BatchSize(size = 20)
+    private Set<Telefono> telefonos = new HashSet<>();
+
 
     public Usuario() {
         this.created = LocalDateTime.now();

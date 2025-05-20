@@ -4,30 +4,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 
-
-@Entity
-@Table(name = "telefonos")
 @Getter
 @Setter
 @NoArgsConstructor
+@Embeddable
 public class Telefono {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private Long number;
-
-    @Column(nullable = false)
+    private Long    number;
     private Integer citycode;
-
-    @Column(nullable = false, length = 10)
-    private String contrycode;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    private String  contrycode;
 }

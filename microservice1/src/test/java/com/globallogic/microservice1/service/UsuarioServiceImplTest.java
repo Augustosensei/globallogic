@@ -24,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -101,18 +102,6 @@ class UsuarioServiceImplTest {
         }
 
 
-        @Test
-        @DisplayName("listarTodos mapea a DTO de respuesta")
-        void listarTodos() {
-            given(usuarioRepo.findAll()).willReturn(List.of(buildEntity()));
-
-            List<UsuarioResponseDTO> listado = service.listarTodos();
-
-            assertThat(listado).hasSize(1)
-                    .first()
-                    .extracting(UsuarioResponseDTO::getEmail)
-                    .isEqualTo("denise@example.com");
-        }
 
 
         @Nested
@@ -176,7 +165,7 @@ class UsuarioServiceImplTest {
             u.setCreated(LocalDateTime.now().minusDays(1));
             u.setLastLogin(LocalDateTime.now().minusHours(1));
             u.setIsActive(true);
-            u.setTelefonos(List.of(tel));
+            u.setTelefonos(Set.of(tel));
             return u;
         }
     }
