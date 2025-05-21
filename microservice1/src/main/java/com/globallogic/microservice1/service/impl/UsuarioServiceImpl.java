@@ -99,42 +99,27 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
 
+    @Override
     public UsuarioDTO mapToDTO(Usuario usuario) {
         UsuarioDTO dto = new UsuarioDTO();
         dto.setName(usuario.getName());
         dto.setEmail(usuario.getEmail());
         dto.setPassword(usuario.getPassword());
-        var telefonos = usuario.getTelefonos().stream().map(tel -> {
-            TelefonoDTO t = new TelefonoDTO();
-            t.setNumber(tel.getNumber());
-            t.setCitycode(tel.getCitycode());
-            t.setContrycode(tel.getContrycode());
-            return t;
-        }).collect(Collectors.toList());
 
+        var telefonos = usuario.getTelefonos().stream()
+                .map(tel -> TelefonoDTO.builder()
+                        .number(tel.getNumber())
+                        .citycode(tel.getCitycode())
+                        .contrycode(tel.getContrycode())
+                        .build()
+                )
+                .collect(Collectors.toList());
         dto.setTelefonos(telefonos);
+
         return dto;
     }
 
-    public UsuarioResponseDTO mapToResponseDTO(Usuario usuario) {
-        return UsuarioResponseDTO.builder()
-                .id(usuario.getId())
-                .name(usuario.getName())
-                .email(usuario.getEmail())
-                .created(usuario.getCreated())
-                .lastLogin(usuario.getLastLogin())
-                .isActive(usuario.getIsActive())
-                .telefonos(
-                        usuario.getTelefonos().stream().map(t -> {
-                            TelefonoDTO dto = new TelefonoDTO();
-                            dto.setNumber(t.getNumber());
-                            dto.setCitycode(t.getCitycode());
-                            dto.setContrycode(t.getContrycode());
-                            return dto;
-                        }).collect(Collectors.toList())
-                )
-                .build();
-    }
+
 
     @Override
     public UsuarioDTO buscarPorEmail(String email) {
@@ -142,6 +127,30 @@ public class UsuarioServiceImpl implements IUsuarioService {
                 .orElseThrow(() -> new ClienteException("Usuario no encontrado", HttpStatus.NOT_FOUND));
         return mapToDTO(usuario);
     }
+
+    @Override
+    public UsuarioResponseDTO mapToResponseDTO(Usuario usuario) {
+        return UsuarioResponseDTO.builder()
+                .id(usuario.getId())             // Ahora asume que tu entidad usa UUID para el id
+                .name(usuario.getName())
+                .email(usuario.getEmail())
+                .created(usuario.getCreated())
+                .lastLogin(usuario.getLastLogin())
+                .isActive(usuario.getIsActive())
+                .password(usuario.getPassword())
+                .telefonos(
+                        usuario.getTelefonos().stream()
+                                .map(t -> TelefonoDTO.builder()
+                                        .number(t.getNumber())
+                                        .citycode(t.getCitycode())
+                                        .contrycode(t.getContrycode())
+                                        .build()
+                                )
+                                .collect(Collectors.toList())
+                )
+                .build();
+    }
+
 
 
 }

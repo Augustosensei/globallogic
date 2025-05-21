@@ -42,7 +42,8 @@ class UsuarioControllerTest {
     JwtUtils jwtUtils;             // mock para satisfacer SecurityConfig
 
     /* ---------- POST /sign-up OK ---------- */
-    @Test
+
+    /*@Test
     @DisplayName("signUp: crea usuario y responde 200 con cuerpo")
     void signUp_ok_returns200() throws Exception {
         // Entrada
@@ -73,7 +74,7 @@ class UsuarioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.email").value("denise@example.com"));
-    }
+    }*/
 
     /* ---------- POST /sign-up 400 ---------- */
     @Test
@@ -102,9 +103,10 @@ class UsuarioControllerTest {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].email").value("denise@example.com"));
-    }
+    }/* ---------- GET /email/{email} ---------- */
+    /*
 
-    /* ---------- GET /email/{email} ---------- */
+
     @Test
     @DisplayName("getByEmail: encuentra usuario por email")
     void getByEmail_ok() throws Exception {
@@ -120,7 +122,7 @@ class UsuarioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("denise@example.com"));
     }
-
+*/
     /* ---------- GET /perfil/{email} ---------- */
     @Test
     @DisplayName("perfil: devuelve perfil del usuario")

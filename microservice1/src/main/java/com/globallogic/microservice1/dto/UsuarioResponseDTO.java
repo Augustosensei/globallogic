@@ -19,4 +19,5 @@ public class UsuarioResponseDTO {
     private LocalDateTime lastLogin;
     private Boolean isActive;
     private List<TelefonoDTO> telefonos;
+    private String password;
 }

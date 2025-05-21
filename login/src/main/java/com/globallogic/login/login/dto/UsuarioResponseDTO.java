@@ -1,5 +1,6 @@
 package com.globallogic.login.login.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class UsuarioDTO {
+public class UsuarioResponseDTO {
 
     private UUID id;
     private LocalDateTime created;
@@ -20,5 +21,6 @@ public class UsuarioDTO {
     private String             name;
     private String             email;
     private String             password;
+    @JsonProperty("telefonos")
     private List<TelefonoDTO> phones;
 }

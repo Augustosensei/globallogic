@@ -1,6 +1,6 @@
 package com.globallogic.login.login.client;
 
-import com.globallogic.login.login.dto.UsuarioDTO;
+import com.globallogic.login.login.dto.UsuarioResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface UsuarioClient {
 
     @GetMapping("/email/{email}")
-    UsuarioDTO getByEmail(@PathVariable("email") String email);
+    UsuarioResponseDTO getByEmail(@PathVariable("email") String email);
 }
