@@ -1,6 +1,7 @@
 package com.globallogic.login.login.security;
 
 
+import com.globallogic.login.login.service.impl.JwtBlacklistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,33 +12,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtUtils jwtUtils;
+    private final JwtAuthFilter jwtAuthFilter; // ¡ojo! NO lo instancies a mano, inyectalo con @Bean
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/login", "/sign-up").permitAll()
+                .antMatchers("/auth/login", "/auth/logout", "/sign-up").permitAll()
                 .antMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().authenticated() // todo lo demás: requiere auth
                 .and()
-                .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-    @Bean
-    public JwtAuthFilter jwtAuthFilter() {
-        return new JwtAuthFilter(jwtUtils);
-    }
-
-
 }
