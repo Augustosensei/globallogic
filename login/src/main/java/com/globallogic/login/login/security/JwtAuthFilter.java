@@ -35,50 +35,38 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain) throws ServletException, IOException {
 
-        String token = extractTokenFromRequest(request);
+        String token = extractTokenFromCookie(request);  // <─ solo cookie
 
-        if (StringUtils.hasText(token)) {
+        if (token != null && !jwtBlacklistService.isBlacklisted(token)
+                && jwtUtils.validateToken(token, jwtUtils.extractUsername(token))) {
 
-            if (jwtBlacklistService.isBlacklisted(token)) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
-            }
-            if (jwtUtils.validateToken(token, jwtUtils.extractUsername(token))) {
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        jwtUtils.extractUsername(token), null, Collections.emptyList()
-                );
-                SecurityContextHolder.getContext().setAuthentication(auth);
-            }
+            UsernamePasswordAuthenticationToken auth =
+                    new UsernamePasswordAuthenticationToken(
+                            jwtUtils.extractUsername(token), null, Collections.emptyList());
+
+            SecurityContextHolder.getContext().setAuthentication(auth);
         }
 
         filterChain.doFilter(request, response);
     }
 
-
-
-
-    private String extractTokenFromRequest(HttpServletRequest request) {
-
-        String bearer = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearer) && bearer.startsWith("Bearer ")) {
-            System.out.println("Token desde header: " + bearer.substring(7));
-            return bearer.substring(7);
-        }
-
+    private String extractTokenFromCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("TOKEN".equals(cookie.getName())) {
-                    System.out.println("Token desde cookie: " + cookie.getValue());
-                    return cookie.getValue();
+            for (Cookie c : cookies) {
+                if ("TOKEN".equals(c.getName())) {
+                    return c.getValue();
                 }
             }
         }
         return null;
     }
+
 
 
 }

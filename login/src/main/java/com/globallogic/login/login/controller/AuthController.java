@@ -33,43 +33,43 @@ public class AuthController {
     private  final JwtUtils jwtUtils;
     private final UsuarioClient usuarioClient;
 
+
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO request, HttpServletResponse response) {
+    public ResponseEntity<LoginResponseDTO> login(
+            @RequestBody @Valid LoginRequestDTO request,
+            HttpServletResponse response) {
+
         LoginResponseDTO loginResponse = authService.login(request);
 
         ResponseCookie jwtCookie = ResponseCookie.from("TOKEN", loginResponse.getToken())
                 .httpOnly(true)
-                .secure(false) // secure=false para localhost
+                .secure(false)
                 .path("/")
-                .maxAge(3600) // duración del token en segundos (1 hora)
+                .sameSite("Strict")
+                .maxAge(3600)
                 .build();
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(loginResponse);
+                .body(loginResponse);       // si ya no lo necesitas, descarta el body
     }
 
 
 
+
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(@CookieValue(name = "TOKEN", required = false) String token,
-                                       @RequestHeader(value = "Authorization", required = false) String authorizationHeader,
-                                       HttpServletResponse response) {
+    public ResponseEntity<Void> logout(
+            @CookieValue(name = "TOKEN", required = false) String token) {
 
-
-        String realToken = token;
-        if ((realToken == null || realToken.isEmpty()) && authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            realToken = authorizationHeader.substring(7);
-        }
-
-        if (realToken != null && !realToken.isEmpty()) {
-            jwtBlacklistService.blacklistToken(realToken);
+        if (token != null && !token.isEmpty()) {
+            jwtBlacklistService.blacklistToken(token);
         }
 
         ResponseCookie deleteCookie = ResponseCookie.from("TOKEN", "")
                 .httpOnly(true)
                 .secure(false)
                 .path("/")
+                .sameSite("Strict")
                 .maxAge(0)
                 .build();
 
@@ -77,6 +77,7 @@ public class AuthController {
                 .header(HttpHeaders.SET_COOKIE, deleteCookie.toString())
                 .build();
     }
+
 
 
 
