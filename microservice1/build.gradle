@@ -55,7 +55,7 @@ jacoco {
 }
 
 jacocoTestReport {
-    dependsOn test // asegura que los tests se ejecuten antes del reporte
+    dependsOn test
 
     reports {
         xml.required = true
