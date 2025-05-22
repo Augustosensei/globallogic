@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.globallogic.microservice1.service.UsuarioServiceImplTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-05-22T03:19:37" hostname="DESKTOP-8FATH2O" time="0.841">
+  <properties/>
+  <testcase name="listarTodos: retorna lista mapeada" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest" time="0.811"/>
+  <testcase name="getEntidadPorEmail: retorna entidad si existe" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest" time="0.006"/>
+  <testcase name="mapToResponseDTO: convierte entidad a response DTO" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest" time="0.002"/>
+  <testcase name="buscarPorEmail: si existe, retorna DTO" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest" time="0.002"/>
+  <testcase name="buscarPorEmail: si NO existe, lanza excepción" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest" time="0.013"/>
+  <testcase name="mapToDTO: convierte entidad a DTO" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest" time="0.001"/>
+  <testcase name="getEntidadPorEmail: lanza excepción si no existe" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

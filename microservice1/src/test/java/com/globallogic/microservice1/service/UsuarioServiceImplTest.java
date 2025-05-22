@@ -172,4 +172,102 @@ class UsuarioServiceImplTest {
             return u;
         }
     }
+
+    @Test
+    @DisplayName("listarTodos: retorna lista mapeada")
+    void listarTodos() {
+        Usuario u = buildEntity();
+        given(usuarioRepo.findAll()).willReturn(List.of(u));
+
+        List<UsuarioResponseDTO> list = service.listarTodos();
+
+        assertThat(list).hasSize(1);
+        assertThat(list.get(0).getEmail()).isEqualTo("denise@example.com");
+    }
+
+    @Test
+    @DisplayName("buscarPorEmail: si existe, retorna DTO")
+    void buscarPorEmail_ok() {
+        Usuario u = buildEntity();
+        given(usuarioRepo.findByEmail("denise@example.com")).willReturn(Optional.of(u));
+
+        UsuarioDTO dto = service.buscarPorEmail("denise@example.com");
+
+        assertThat(dto.getEmail()).isEqualTo("denise@example.com");
+    }
+
+    @Test
+    @DisplayName("buscarPorEmail: si NO existe, lanza excepción")
+    void buscarPorEmail_noExiste() {
+        given(usuarioRepo.findByEmail("denise@example.com")).willReturn(Optional.empty());
+
+        assertThatThrownBy(() -> service.buscarPorEmail("denise@example.com"))
+                .isInstanceOf(ClienteException.class)
+                .extracting("status").isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    @DisplayName("getEntidadPorEmail: retorna entidad si existe")
+    void getEntidadPorEmail_ok() {
+        Usuario u = buildEntity();
+        given(usuarioRepo.findByEmail("denise@example.com")).willReturn(Optional.of(u));
+
+        Usuario result = service.getEntidadPorEmail("denise@example.com");
+
+        assertThat(result).isSameAs(u);
+    }
+
+    @Test
+    @DisplayName("getEntidadPorEmail: lanza excepción si no existe")
+    void getEntidadPorEmail_noExiste() {
+        given(usuarioRepo.findByEmail("denise@example.com")).willReturn(Optional.empty());
+
+        assertThatThrownBy(() -> service.getEntidadPorEmail("denise@example.com"))
+                .isInstanceOf(ClienteException.class)
+                .extracting("status").isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    @DisplayName("mapToDTO: convierte entidad a DTO")
+    void mapToDTO_ok() {
+        Usuario u = buildEntity();
+
+        UsuarioDTO dto = service.mapToDTO(u);
+
+        assertThat(dto.getEmail()).isEqualTo("denise@example.com");
+        assertThat(dto.getTelefonos()).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("mapToResponseDTO: convierte entidad a response DTO")
+    void mapToResponseDTO_ok() {
+        Usuario u = buildEntity();
+
+        UsuarioResponseDTO dto = service.mapToResponseDTO(u);
+
+        assertThat(dto.getEmail()).isEqualTo("denise@example.com");
+        assertThat(dto.getTelefonos()).hasSize(1);
+        assertThat(dto.getIsActive()).isTrue();
+    }
+
+    private Usuario buildEntity() {
+        Telefono tel = new Telefono();
+        tel.setNumber(123L);
+        tel.setCitycode(54);
+        tel.setContrycode("+54");
+
+        UUID expectedId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+
+        Usuario u = new Usuario();
+        u.setId(expectedId);
+        u.setName("Denise");
+        u.setEmail("denise@example.com");
+        u.setCreated(LocalDateTime.now().minusDays(1));
+        u.setLastLogin(LocalDateTime.now().minusHours(1));
+        u.setIsActive(true);
+        u.setTelefonos(Set.of(tel));
+        return u;
+    }
+
+
 }
