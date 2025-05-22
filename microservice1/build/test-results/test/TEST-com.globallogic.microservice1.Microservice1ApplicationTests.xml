@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.globallogic.microservice1.Microservice1ApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-05-22T02:16:26" hostname="DESKTOP-8FATH2O" time="0.082">
-  <properties/>
-  <testcase name="contextLoads()" classname="com.globallogic.microservice1.Microservice1ApplicationTests" time="0.082"/>
-  <system-out><![CDATA[23:16:22.838 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+<testsuite
+	name="com.globallogic.microservice1.Microservice1ApplicationTests"
+	tests="1" skipped="0" failures="0" errors="0"
+	timestamp="2025-05-22T02:16:26" hostname="DESKTOP-8FATH2O" time="0.082">
+	<properties />
+	<testcase name="contextLoads()"
+		classname="com.globallogic.microservice1.Microservice1ApplicationTests"
+		time="0.082" />
+	<system-out><![CDATA[23:16:22.838 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
 23:16:22.846 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
 23:16:22.872 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.globallogic.microservice1.Microservice1ApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
 23:16:22.880 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.globallogic.microservice1.Microservice1ApplicationTests], using SpringBootContextLoader
@@ -117,5 +122,6 @@ This generated password is for development use only. Your security configuration
 2025-05-21 23:16:26.324  INFO 16680 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:usuariosdb'
 2025-05-21 23:16:26.573  INFO 16680 --- [    Test worker] c.g.m.Microservice1ApplicationTests      : Started Microservice1ApplicationTests in 3.491 seconds (JVM running for 4.773)
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+	<system-err><![CDATA[]]>
+	</system-err>
 </testsuite>

@@ -2,7 +2,6 @@ package com.globallogic.login.login.exception;
 
 import lombok.Builder;
 import lombok.Value;
-
 import java.time.LocalDateTime;
 
 @Value

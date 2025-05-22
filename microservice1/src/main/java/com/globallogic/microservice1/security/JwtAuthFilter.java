@@ -46,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     private String extractToken(HttpServletRequest request) {
-        // 1. Intentar desde cookie
+
         if (request.getCookies() != null) {
             for (javax.servlet.http.Cookie cookie : request.getCookies()) {
                 if ("TOKEN".equals(cookie.getName())) {
@@ -55,7 +55,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
         }
 
-        // 2. Fallback al header Authorization
+
         String headerAuth = request.getHeader("Authorization");
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
             return headerAuth.substring(7);

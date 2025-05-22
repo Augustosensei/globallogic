@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-
 
 @Data
 @Builder
@@ -16,10 +14,6 @@ public class TelefonoDTO {
 
 
     private Long number;
-
-
     private Integer citycode;
-
-
     private String contrycode;
 }

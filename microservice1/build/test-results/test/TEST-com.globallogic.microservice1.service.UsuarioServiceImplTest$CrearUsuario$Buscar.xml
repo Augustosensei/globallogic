@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-05-22T02:16:27" hostname="DESKTOP-8FATH2O" time="0.012">
-  <properties/>
-  <testcase name="porId_noExiste()" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" time="0.002"/>
-  <testcase name="perfilPorEmail_ok()" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" time="0.008"/>
-  <testcase name="porId_ok()" classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+<testsuite
+	name="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar"
+	tests="3" skipped="0" failures="0" errors="0"
+	timestamp="2025-05-22T02:16:27" hostname="DESKTOP-8FATH2O" time="0.012">
+	<properties />
+	<testcase name="porId_noExiste()"
+		classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar"
+		time="0.002" />
+	<testcase name="perfilPorEmail_ok()"
+		classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar"
+		time="0.008" />
+	<testcase name="porId_ok()"
+		classname="com.globallogic.microservice1.service.UsuarioServiceImplTest$CrearUsuario$Buscar"
+		time="0.002" />
+	<system-out><![CDATA[]]>
+	</system-out>
+	<system-err><![CDATA[]]>
+	</system-err>
 </testsuite>

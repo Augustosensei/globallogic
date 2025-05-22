@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.globallogic.microservice1.controller.UsuarioControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-05-22T02:16:27" hostname="DESKTOP-8FATH2O" time="0.229">
-  <properties/>
-  <testcase name="listarUsuarios: devuelve lista" classname="com.globallogic.microservice1.controller.UsuarioControllerTest" time="0.117"/>
-  <testcase name="signUp: email faltante -&gt; 400 Bad Request" classname="com.globallogic.microservice1.controller.UsuarioControllerTest" time="0.089"/>
-  <testcase name="perfil: devuelve perfil del usuario" classname="com.globallogic.microservice1.controller.UsuarioControllerTest" time="0.021"/>
-  <system-out><![CDATA[2025-05-21 23:16:26.676  INFO 16680 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.globallogic.microservice1.controller.UsuarioControllerTest], using SpringBootContextLoader
+<testsuite
+	name="com.globallogic.microservice1.controller.UsuarioControllerTest"
+	tests="3" skipped="0" failures="0" errors="0"
+	timestamp="2025-05-22T02:16:27" hostname="DESKTOP-8FATH2O" time="0.229">
+	<properties />
+	<testcase name="listarUsuarios: devuelve lista"
+		classname="com.globallogic.microservice1.controller.UsuarioControllerTest"
+		time="0.117" />
+	<testcase name="signUp: email faltante -&gt; 400 Bad Request"
+		classname="com.globallogic.microservice1.controller.UsuarioControllerTest"
+		time="0.089" />
+	<testcase name="perfil: devuelve perfil del usuario"
+		classname="com.globallogic.microservice1.controller.UsuarioControllerTest"
+		time="0.021" />
+	<system-out><![CDATA[2025-05-21 23:16:26.676  INFO 16680 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.globallogic.microservice1.controller.UsuarioControllerTest], using SpringBootContextLoader
 2025-05-21 23:16:26.676  INFO 16680 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.globallogic.microservice1.controller.UsuarioControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
 2025-05-21 23:16:26.676  INFO 16680 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.globallogic.microservice1.controller.UsuarioControllerTest]: UsuarioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
 2025-05-21 23:16:26.693  INFO 16680 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.globallogic.microservice1.Microservice1Application for test class com.globallogic.microservice1.controller.UsuarioControllerTest
@@ -33,5 +42,6 @@ This generated password is for development use only. Your security configuration
 2025-05-21 23:16:27.154  INFO 16680 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 2025-05-21 23:16:27.168  INFO 16680 --- [    Test worker] c.g.m.controller.UsuarioControllerTest   : Started UsuarioControllerTest in 0.466 seconds (JVM running for 5.364)
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+	<system-err><![CDATA[]]>
+	</system-err>
 </testsuite>
