@@ -1,6 +1,5 @@
 package com.globallogic.microservice1.controller;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globallogic.microservice1.dto.UsuarioDTO;
 import com.globallogic.microservice1.dto.UsuarioResponseDTO;
@@ -22,44 +21,41 @@ import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UsuarioController.class)
-@AutoConfigureMockMvc(addFilters = false)   // desactiva filtros de seguridad
+@AutoConfigureMockMvc(addFilters = false)
 class UsuarioControllerTest {
 
-    @Autowired
-    MockMvc mockMvc;
-    @Autowired
-    ObjectMapper objectMapper;
+    @Autowired private MockMvc mockMvc;
+    @Autowired private ObjectMapper objectMapper;
 
-    @MockBean
-    IUsuarioService usuarioService;
-    @MockBean
-    JwtUtils jwtUtils;             // mock para satisfacer SecurityConfig
+    @MockBean private IUsuarioService usuarioService;
+    @MockBean private JwtUtils jwtUtils;
 
-    /* ---------- POST /sign-up OK ---------- */
+    private static final UUID ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+    private static final String EMAIL = "denise@example.com";
 
-    /*@Test
+    @Test
     @DisplayName("signUp: crea usuario y responde 200 con cuerpo")
     void signUp_ok_returns200() throws Exception {
         // Entrada
         UsuarioDTO in = new UsuarioDTO();
         in.setName("Denise");
-        in.setEmail("denise@example.com");
-        in.setPassword("a2asfGfdfdf4");
+        in.setEmail(EMAIL);
+        in.setPassword("A1bcdefg2"); // válida según regex
 
-        // Mocks service
-        UUID expectedId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+        // Entidad y respuesta esperada
         Usuario entidad = new Usuario();
-        entidad.setId(expectedId);
+        entidad.setId(ID);
+        entidad.setEmail(EMAIL);
+        entidad.setName("Denise");
+
         UsuarioResponseDTO out = UsuarioResponseDTO.builder()
-                .id(expectedId)
+                .id(ID)
                 .name("Denise")
-                .email("denise@example.com")
+                .email(EMAIL)
                 .created(LocalDateTime.now())
                 .isActive(true)
                 .build();
@@ -67,78 +63,77 @@ class UsuarioControllerTest {
         given(usuarioService.crearUsuario(any(UsuarioDTO.class))).willReturn(entidad);
         given(usuarioService.mapToResponseDTO(entidad)).willReturn(out);
 
-        // Ejecución + asserts
         mockMvc.perform(post("/sign-up")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(in)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.email").value("denise@example.com"));
-    }*/
+                .andExpect(jsonPath("$.id").value(ID.toString()))
+                .andExpect(jsonPath("$.email").value(EMAIL));
+    }
 
-    /* ---------- POST /sign-up 400 ---------- */
     @Test
     @DisplayName("signUp: email faltante -> 400 Bad Request")
     void signUp_invalidEmail_returns400() throws Exception {
-        UsuarioDTO in = new UsuarioDTO(); // sin email ni password
+        UsuarioDTO in = new UsuarioDTO(); // email y password vacíos
         mockMvc.perform(post("/sign-up")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(in)))
                 .andExpect(status().isBadRequest());
     }
 
-    /* ---------- GET / (listar) ---------- */
     @Test
     @DisplayName("listarUsuarios: devuelve lista")
     void listarUsuarios_ok() throws Exception {
-
-        UUID expectedId = UUID.fromString("00000000-0000-0000-0000-000000000001");
         UsuarioResponseDTO dto = UsuarioResponseDTO.builder()
-                .id(expectedId)
-                .email("denise@example.com")
+                .id(ID)
+                .email(EMAIL)
                 .name("Denise")
                 .build();
+
         given(usuarioService.listarTodos()).willReturn(List.of(dto));
 
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].email").value("denise@example.com"));
-    }/* ---------- GET /email/{email} ---------- */
-    /*
-
+                .andExpect(jsonPath("$[0].email").value(EMAIL));
+    }
 
     @Test
     @DisplayName("getByEmail: encuentra usuario por email")
     void getByEmail_ok() throws Exception {
         Usuario entidad = new Usuario();
-        entidad.setEmail("denise@example.com");
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setEmail("denise@example.com");
+        entidad.setEmail(EMAIL);
+        entidad.setName("Denise");
 
-        given(usuarioService.getEntidadPorEmail("denise@example.com")).willReturn(entidad);
-        given(usuarioService.mapToDTO(entidad)).willReturn(dto);
+        UsuarioResponseDTO dto = UsuarioResponseDTO.builder()
+                .email(EMAIL)
+                .name("Denise")
+                .build();
 
-        mockMvc.perform(get("/email/denise@example.com"))
+        given(usuarioService.getEntidadPorEmail(EMAIL)).willReturn(entidad);
+        given(usuarioService.mapToResponseDTO(entidad)).willReturn(dto);
+
+        mockMvc.perform(get("/email/{email}", EMAIL))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("denise@example.com"));
+                .andExpect(jsonPath("$.email").value(EMAIL));
     }
-*/
-    /* ---------- GET /perfil/{email} ---------- */
+
     @Test
     @DisplayName("perfil: devuelve perfil del usuario")
     void perfil_ok() throws Exception {
         Usuario entidad = new Usuario();
-        entidad.setEmail("denise@example.com");
+        entidad.setEmail(EMAIL);
+        entidad.setName("Denise");
+
         UsuarioResponseDTO dto = UsuarioResponseDTO.builder()
-                .email("denise@example.com")
+                .email(EMAIL)
                 .name("Denise")
                 .build();
 
-        given(usuarioService.getEntidadPorEmail("denise@example.com")).willReturn(entidad);
+        given(usuarioService.getEntidadPorEmail(EMAIL)).willReturn(entidad);
         given(usuarioService.mapToResponseDTO(entidad)).willReturn(dto);
 
-        mockMvc.perform(get("/perfil/denise@example.com"))
+        mockMvc.perform(get("/perfil/{email}", EMAIL))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("denise@example.com"));
+                .andExpect(jsonPath("$.email").value(EMAIL));
     }
 }
