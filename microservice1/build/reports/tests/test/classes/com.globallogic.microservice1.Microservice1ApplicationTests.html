@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Microservice1ApplicationTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Microservice1ApplicationTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.globallogic.microservice1.html">com.globallogic.microservice1</a> &gt; Microservice1ApplicationTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.143s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">contextLoads()</td>
+<td class="success">0.143s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>00:24:13.882 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+00:24:13.912 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+00:24:13.990 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.globallogic.microservice1.Microservice1ApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+00:24:14.019 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.globallogic.microservice1.Microservice1ApplicationTests], using SpringBootContextLoader
+00:24:14.032 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.globallogic.microservice1.Microservice1ApplicationTests]: class path resource [com/globallogic/microservice1/Microservice1ApplicationTests-context.xml] does not exist
+00:24:14.032 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.globallogic.microservice1.Microservice1ApplicationTests]: class path resource [com/globallogic/microservice1/Microservice1ApplicationTestsContext.groovy] does not exist
+00:24:14.033 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.globallogic.microservice1.Microservice1ApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+00:24:14.034 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.globallogic.microservice1.Microservice1ApplicationTests]: Microservice1ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+00:24:14.111 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.globallogic.microservice1.Microservice1ApplicationTests]
+00:24:14.230 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [D:\programacion\2025\globallogic\microservice1\build\classes\java\main\com\globallogic\microservice1\Microservice1Application.class]
+00:24:14.232 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.globallogic.microservice1.Microservice1Application for test class com.globallogic.microservice1.Microservice1ApplicationTests
+00:24:14.439 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.globallogic.microservice1.Microservice1ApplicationTests]: using defaults.
+00:24:14.440 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+00:24:14.482 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@17fa14a3, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5552d10, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@3b3190fd, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@219dd935, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@66859ea9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4a9412c4, org.springframework.test.context.transaction.TransactionalTestExecutionListener@7d15c513, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@320efff5, org.springframework.test.context.event.EventPublishingTestExecutionListener@78b44fcb, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@12dc702b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@41b2123e, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@486bcaa, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5e9671e6, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2f3a0f37, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@7ec8db0c]
+00:24:14.489 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@160e45c8 testClass = Microservice1ApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@7f9dbe11 testClass = Microservice1ApplicationTests, locations = '{}', classes = '{class com.globallogic.microservice1.Microservice1Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@58739e5e, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@42cc5460, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@43c0c13a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@5353dd09, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@3c09a350, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@50756c76], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.5.14)
+
+2025-05-22 00:24:15.128  INFO 27048 --- [    Test worker] c.g.m.Microservice1ApplicationTests      : Starting Microservice1ApplicationTests using Java 11.0.0.2 on DESKTOP-8FATH2O with PID 27048 (started by augus in D:\programacion\2025\globallogic\microservice1)
+2025-05-22 00:24:15.130  INFO 27048 --- [    Test worker] c.g.m.Microservice1ApplicationTests      : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2025-05-22 00:24:16.355  INFO 27048 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-22 00:24:16.439  INFO 27048 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 1 JPA repository interfaces.
+2025-05-22 00:24:17.320  INFO 27048 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-22 00:24:17.450  INFO 27048 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.33
+2025-05-22 00:24:17.696  INFO 27048 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-05-22 00:24:17.919  INFO 27048 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-22 00:24:18.518  INFO 27048 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-22 00:24:18.589  INFO 27048 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2025-05-22 00:24:19.882 DEBUG 27048 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table user_phones (
+       usuario_id binary not null,
+        citycode integer,
+        contrycode varchar(255),
+        number bigint
+    )
+Hibernate: 
+    
+    create table user_phones (
+       usuario_id binary not null,
+        citycode integer,
+        contrycode varchar(255),
+        number bigint
+    )
+2025-05-22 00:24:19.888 DEBUG 27048 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table users (
+       id binary not null,
+        created timestamp not null,
+        email varchar(150) not null,
+        is_active boolean not null,
+        last_login timestamp not null,
+        name varchar(100),
+        password varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table users (
+       id binary not null,
+        created timestamp not null,
+        email varchar(150) not null,
+        is_active boolean not null,
+        last_login timestamp not null,
+        name varchar(100),
+        password varchar(255) not null,
+        primary key (id)
+    )
+2025-05-22 00:24:19.898 DEBUG 27048 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table users 
+       drop constraint if exists UK_6dotkott2kjsp8vw4d0m25fb7
+Hibernate: 
+    
+    alter table users 
+       drop constraint if exists UK_6dotkott2kjsp8vw4d0m25fb7
+2025-05-22 00:24:19.899 DEBUG 27048 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table users 
+       add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+Hibernate: 
+    
+    alter table users 
+       add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+2025-05-22 00:24:19.900 DEBUG 27048 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table user_phones 
+       add constraint FKnr1ypdfsb4ksdylmvpjxxb2wb 
+       foreign key (usuario_id) 
+       references users
+Hibernate: 
+    
+    alter table user_phones 
+       add constraint FKnr1ypdfsb4ksdylmvpjxxb2wb 
+       foreign key (usuario_id) 
+       references users
+2025-05-22 00:24:19.905  INFO 27048 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-05-22 00:24:19.921  INFO 27048 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-22 00:24:20.534  WARN 27048 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-22 00:24:20.705  WARN 27048 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 8228d702-c4e9-47b5-8122-4bc1e4bf8ab6
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-05-22 00:24:20.897  INFO 27048 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will not secure any request
+2025-05-22 00:24:21.472  INFO 27048 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:usuariosdb'
+2025-05-22 00:24:21.842  INFO 27048 --- [    Test worker] c.g.m.Microservice1ApplicationTests      : Started Microservice1ApplicationTests in 7.265 seconds (JVM running for 10.102)
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>[2025.05.22 00:24:20] (Coverage): Error during class instrumentation: org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer: java.lang.RuntimeException: java.io.IOException: Class org/springframework/security/ldap/authentication/PasswordComparisonAuthenticator not found
+[2025.05.22 00:24:20] (Coverage): Error during class instrumentation: org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer: java.lang.RuntimeException: java.io.IOException: Class org/springframework/security/oauth2/client/endpoint/OAuth2AccessTokenResponseClient not found
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4</a> at 22 may. 2025 0:24:24</p>
+</div>
+</div>
+</body>
+</html>

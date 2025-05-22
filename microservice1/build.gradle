@@ -47,3 +47,30 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+jacocoTestReport {
+    dependsOn test // asegura que los tests se ejecuten antes del reporte
+
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(
+                files(classDirectories.files.collect { fileTree(dir: it, exclude: [
+                        '**/security/PasswordConfig.class',
+                        '**/security/JwtAuthFilter.class',
+                        '**/security/JwtUtils.class',
+                        '**/security/SecurityConfig.class'
+                ]) })
+        )
+    }
+}
