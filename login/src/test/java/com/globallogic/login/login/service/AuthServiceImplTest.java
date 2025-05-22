@@ -2,11 +2,11 @@ package com.globallogic.login.login.service;
 
 
 import com.globallogic.login.login.client.UsuarioClient;
-import com.globallogic.login.login.dto.LoginRequestDTO;
-import com.globallogic.login.login.dto.UsuarioResponseDTO;
+import com.globallogic.login.login.dto.*;
 import com.globallogic.login.login.exception.ClienteException;
 import com.globallogic.login.login.security.JwtUtils;
 import com.globallogic.login.login.service.impl.AuthServiceImpl;
+import feign.FeignException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,9 +17,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
-
 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceImplTest {
@@ -30,15 +33,10 @@ class AuthServiceImplTest {
     private static final String PROVISIONAL_JWT = "provisional.jwt";
     private static final String FINAL_JWT = "final.jwt";
 
-    @Mock
-    private UsuarioClient usuarioClient;
-    @Mock
-    private JwtUtils jwtUtils;
-    @Mock
-    private PasswordEncoder passwordEncoder;
-
-    @InjectMocks
-    private AuthServiceImpl authService;
+    @Mock private UsuarioClient usuarioClient;
+    @Mock private JwtUtils jwtUtils;
+    @Mock private PasswordEncoder passwordEncoder;
+    @InjectMocks private AuthServiceImpl authService;
 
     @AfterEach
     void cleanSecurityContext() {
@@ -46,50 +44,68 @@ class AuthServiceImplTest {
     }
 
     /* ---------- Caso feliz ---------- */
-/*    @Test
-    void login_ok_returns_response_and_sets_context() {
+    @Test
+    void login_success_returnsLoginResponseDTO() {
         // given
         LoginRequestDTO req = new LoginRequestDTO(EMAIL, RAW_PASSWORD);
-        UsuarioDTO usuario = UsuarioDTO.builder()
+
+        UsuarioResponseDTO usuario = UsuarioResponseDTO.builder()
+                .id(UUID.randomUUID())
                 .email(EMAIL)
+                .name("Denise")
+                .created(LocalDateTime.now())
+                .lastLogin(LocalDateTime.now())
+                .isActive(true)
                 .password(HASHED_PASSWORD)
+                .phones(Collections.singletonList(
+                        TelefonoDTO.builder()
+                                .number(1234567890L)
+                                .citycode(11)
+                                .contrycode("+54")
+                                .build()))
                 .build();
 
-        // mocks
-        given(jwtUtils.generateToken(EMAIL))
-                .willReturn(PROVISIONAL_JWT)   // primera llamada
-                .willReturn(FINAL_JWT);        // segunda llamada
+        given(jwtUtils.generateToken(EMAIL)).willReturn(PROVISIONAL_JWT);
         given(usuarioClient.getByEmail(EMAIL)).willReturn(usuario);
         given(passwordEncoder.matches(RAW_PASSWORD, HASHED_PASSWORD)).willReturn(true);
+        given(jwtUtils.generateToken(EMAIL)).willReturn(FINAL_JWT);
 
         // when
-        LoginResponseDTO res = authService.login(req);
+        LoginResponseDTO response = authService.login(req);
 
         // then
-        assertThat(res.getToken()).isEqualTo(FINAL_JWT);
-        assertThat(res.getEmail()).isEqualTo(EMAIL);
-        assertThat(res.getLastLogin())
-                .isCloseTo(LocalDateTime.now(), within(1, ChronoUnit.SECONDS));
-
-        // y el contexto realmente contiene el token final
-        UsernamePasswordAuthenticationToken auth =
-                (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        assertThat(auth).isNotNull();
-        assertThat(auth.getCredentials()).isEqualTo(FINAL_JWT);
-        assertThat(auth.getPrincipal()).isEqualTo(EMAIL);
-
-        // verify interactions
-        then(usuarioClient).should().getByEmail(EMAIL);
-        then(passwordEncoder).should().matches(RAW_PASSWORD, HASHED_PASSWORD);
-        then(jwtUtils).should(times(2)).generateToken(EMAIL);
+        assertThat(response).isNotNull();
+        assertThat(response.getToken()).isEqualTo(FINAL_JWT);
+        assertThat(response.getEmail()).isEqualTo(EMAIL);
+        assertThat(response.getName()).isEqualTo("Denise");
+        assertThat(response.getPhones()).hasSize(1);
     }
-*/
 
+    /* ---------- Feign error ---------- */
+    @Test
+    void login_usuarioClientThrowsFeignException_throwsClienteExceptionBadGateway() {
+        // given
+        LoginRequestDTO req = new LoginRequestDTO(EMAIL, RAW_PASSWORD);
+
+        given(jwtUtils.generateToken(EMAIL)).willReturn(PROVISIONAL_JWT);
+        given(usuarioClient.getByEmail(EMAIL)).willThrow(mock(FeignException.class));
+
+        // when / then
+        assertThatThrownBy(() -> authService.login(req))
+                .isInstanceOf(ClienteException.class)
+                .hasMessageContaining("No se pudo obtener el usuario")
+                .extracting("status").isEqualTo(HttpStatus.BAD_GATEWAY);
+    }
+
+    /* ---------- Password incorrecta ---------- */
     @Test
     void login_badPassword_throwsClienteExceptionUnauthorized() {
         // given
         LoginRequestDTO req = new LoginRequestDTO(EMAIL, RAW_PASSWORD);
-        UsuarioResponseDTO usuario = UsuarioResponseDTO.builder().email(EMAIL).password(HASHED_PASSWORD).build();
+        UsuarioResponseDTO usuario = UsuarioResponseDTO.builder()
+                .email(EMAIL)
+                .password(HASHED_PASSWORD)
+                .build();
 
         given(jwtUtils.generateToken(EMAIL)).willReturn(PROVISIONAL_JWT);
         given(usuarioClient.getByEmail(EMAIL)).willReturn(usuario);
